@@ -1,24 +1,26 @@
 const express = require('express');
-const path = require('path')
+const path = require('path');
+const ejs = require('ejs');
 
 const app = express();
 
+app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
 app.get('/about', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'pages/about.html'))
+    res.render(path.resolve(__dirname, 'views/about'))
 })
 
 app.get('/contact', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'pages/contact.html'))
+    res.render(path.resolve(__dirname, 'views/contact'))
 })
 
 app.get('/post', (req, res) => {
-    res.sendfile(path.resolve(__dirname, 'pages/post.html'))
+    res.render(path.resolve(__dirname, 'views/post'))
 })
 
 app.get('/', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'pages/index.html'))
+    res.render(path.resolve(__dirname, 'views/index'))
 })
 
 app.listen(3000, () => console.log('The app has started'))
