@@ -1,9 +1,9 @@
 const express = require('express');
-const path = require('path');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
 
-const BlogPOst = require('./modals/BlogPost')
+const blogController = require('./controllers/blog')
+const customMiddleWares = require('./middlewares')
 
 mongoose.connect('mongodb://localhost/my_database')
     .then(() => console.log('connected to mongodb'))
@@ -19,46 +19,14 @@ app.use(bodyParser.urlencoded({
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
-app.get('/about', (req, res) => {
-    res.render(path.resolve(__dirname, 'views/about'))
-})
+app.use('/posts/store', customMiddleWares.validateBlog)
 
-app.get('/contact', (req, res) => {
-    res.render(path.resolve(__dirname, 'views/contact'))
-})
+app.post('/posts/store', blogController.storeBlog)
 
-app.post('/posts/store', async (req, res) => {
-    try {
-        const blog = new BlogPOst(req.body)
-        await blog.save();
-        // res.status(201).send('blog saved successfully')
-        res.redirect('/')
-    } catch (err) {
-        console.log('error in saving data in db', err)
-    }
-})
+app.get('/posts/new', blogController.newBlog)
 
-app.get('/posts/new', (req, res) => {
-    res.render(path.resolve(__dirname, 'views/create'))
-})
+app.get('/post/:id', blogController.getBlogById)
 
-app.get('/post/:id', async (req, res) => {
-    try {
-        const blog = await BlogPOst.findById(req.params.id)
-        console.log('check blog', blog)
-        res.render('post', {
-            blog
-        })
-    } catch (err) {
-        console.log('error while fetching blog with id', err)
-    }
-})
-
-app.get('/', async (req, res) => {
-    const blogs = await BlogPOst.find()
-    res.render('index', {
-        blogs,
-    })
-})
+app.get('/', blogController.getBlogs)
 
 app.listen(3000, () => console.log('The app has started'))
