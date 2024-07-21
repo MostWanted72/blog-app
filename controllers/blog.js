@@ -8,16 +8,17 @@ exports.getBlogs =  async (req, res) => {
 }
 
 exports.newBlog = (req, res) => {
-    res.render('create')
+    return res.render('create')
 }
 
 exports.storeBlog = async (req, res) => {
     try {
         const blog = new BlogPOst(req.body)
         await blog.save();
-        res.redirect('/')
+        return res.redirect('/')
     } catch (err) {
         console.log('error in saving data in db', err)
+        return res.redirect('/')
     }
 }
 

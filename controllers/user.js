@@ -35,7 +35,7 @@ exports.postLoginUser = async (req, res) => {
         res.redirect('/');
     } catch (error) {
         console.log('error logging user', error)
-        res.redirect('/user/login')
+        res.redirect('/users/login')
     }
 }
 
