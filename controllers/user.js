@@ -10,6 +10,30 @@ exports.saveUser = async (req, res) => {
         await user.save()
         res.redirect('/')
     } catch (err) {
-        console.log('check this ', err)
+        console.log('check this user ', err)
+        res.redirect('/auth/register')
+    }
+}
+
+exports.loginUser = (req, res) => {
+    res.render('login')
+}
+
+exports.postLoginUser = async (req, res) => {
+    const { username, password } = req.body
+    try {
+        const user = await User.findOne({ username })
+        if (!user) {
+            return res.status(400).send("Invalid username")
+        }
+        const isMatch = await user.isPasswordMatch(password)
+
+        if (!isMatch) {
+            return res.status(400).send('Password does not match')
+        }
+        res.redirect('/');
+    } catch (error) {
+        console.log('error logging user', error)
+        res.redirect('/user/login')
     }
 }

@@ -24,6 +24,10 @@ app.use('/posts/store', customMiddleWares.validateBlog)
 
 app.get('/auth/register', userController.registerUser)
 
+app.get('/auth/login', userController.loginUser)
+
+app.post('/user/login', userController.postLoginUser)
+
 app.post('/users/register',userController.saveUser)
 
 app.post('/posts/store', blogController.storeBlog)
