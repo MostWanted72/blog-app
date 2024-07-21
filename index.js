@@ -48,8 +48,12 @@ app.post('/posts/store', checkUserSession,  blogController.storeBlog)
 
 app.get('/posts/new', checkUserSession, blogController.newBlog)
 
+app.get('/auth/logout', userController.logout)
+
 app.get('/post/:id', blogController.getBlogById)
 
 app.get('/', blogController.getBlogs)
+
+app.use((req, res) => res.render('notfound'))
 
 app.listen(3000, () => console.log('The app has started'))

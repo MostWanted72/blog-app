@@ -38,3 +38,7 @@ exports.postLoginUser = async (req, res) => {
         res.redirect('/user/login')
     }
 }
+
+exports.logout = (req, res) => {
+    req.session.destroy(() => res.redirect('/'))
+}
