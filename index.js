@@ -28,7 +28,6 @@ app.get('/contact', (req, res) => {
 })
 
 app.post('/posts/store', async (req, res) => {
-    console.log('request data', req.body)
     try {
         const blog = new BlogPOst(req.body)
         await blog.save();
@@ -43,12 +42,23 @@ app.get('/posts/new', (req, res) => {
     res.render(path.resolve(__dirname, 'views/create'))
 })
 
-app.get('/post', (req, res) => {
-    res.render(path.resolve(__dirname, 'views/post'))
+app.get('/post/:id', async (req, res) => {
+    try {
+        const blog = await BlogPOst.findById(req.params.id)
+        console.log('check blog', blog)
+        res.render('post', {
+            blog
+        })
+    } catch (err) {
+        console.log('error while fetching blog with id', err)
+    }
 })
 
-app.get('/', (req, res) => {
-    res.render(path.resolve(__dirname, 'views/index'))
+app.get('/', async (req, res) => {
+    const blogs = await BlogPOst.find()
+    res.render('index', {
+        blogs,
+    })
 })
 
 app.listen(3000, () => console.log('The app has started'))
