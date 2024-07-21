@@ -31,6 +31,7 @@ exports.postLoginUser = async (req, res) => {
         if (!isMatch) {
             return res.status(400).send('Password does not match')
         }
+        req.session.userid = user._id;
         res.redirect('/');
     } catch (error) {
         console.log('error logging user', error)
