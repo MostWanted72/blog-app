@@ -17,7 +17,7 @@ exports.checkUserSession = async (req, res, next) => {
         if (!user && notAllowedForUsers.includes(req.path)) {
             return next()
         }
-        console.log('check path', req.path)
+        console.log('check path', user)
         return res.redirect('/')
     } catch(err) {
         console.log('failed to check session')

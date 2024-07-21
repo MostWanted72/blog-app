@@ -25,6 +25,12 @@ app.use(session({
     cookie: { maxAge: 50000 }
 }))
 
+global.loggedIn = null;
+app.use('*', (req, res, next) => {
+    global.loggedIn = req.session.userid;
+    next()
+})
+
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
