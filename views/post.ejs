@@ -10,12 +10,10 @@
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="post-heading">
-                            <h1><%= blog.title %></h1>
-                            <!-- <h2 class="subheading"><%= blog.body %></h2> -->
+                            <h1><%= employee.name %></h1>
+                            <!-- <h2 class="subheading"><%= employee.designation %></h2> -->
                             <span class="meta">
-                                Posted by
-                                <a href="#!"><%= blog.user_name %></a>
-                                on <%= blog.date_posted %>
+                                <a href="#!"><%= employee.designation %></a>
                             </span>
                         </div>
                     </div>
@@ -27,9 +25,8 @@
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
-                       <p><%= blog.body %></p>
+                       <p><%= employee.designation %></p>
                         <p>
-                            Placeholder text by
                             <a href="http://spaceipsum.com/">Space Ipsum</a>
                             &middot; Images by
                             <a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>

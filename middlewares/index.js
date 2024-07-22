@@ -8,7 +8,7 @@ exports.validateBlog = (req, res, next) => {
 }
 
 exports.checkUserSession = async (req, res, next) => {
-    const notAllowedForUsers = ['/user/login', '/login', '/register', '/users/register']
+    const notAllowedForUsers = ['/login', '/login', '/register', '/register']
     try {
         const user = await User.findOne({ _id: req.session.userid })
         if (user && !notAllowedForUsers.includes(req.path)) {

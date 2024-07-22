@@ -5,11 +5,10 @@ const session = require('express-session');
 const swaggerUi = require('swagger-ui-express')
 const swaggerJSDoc = require('swagger-jsdoc')
 
-const blogController = require('./controllers/blog')
-const userController = require('./controllers/user')
-
 const authRoute = require('./routes/auth')
 const userRoute = require('./routes/user')
+const employeeRoute = require('./routes/employee')
+const employeeController = require('./controllers/employee')
 
 const { checkUserSession, validateBlog } = require('./middlewares');
 const { swaggerOptions } = require('./utils')
@@ -48,9 +47,10 @@ app.use(express.static('public'))
 app.use('/posts/store', checkUserSession, validateBlog)
 
 app.use('/auth', authRoute)
-app.use(userRoute)
+app.use('/user', userRoute)
+app.use('/employee', employeeRoute)
 
-app.get('/', blogController.getBlogs)
+app.get('/', employeeController.getEmployees)
 
 app.use((req, res) => res.render('notfound'))
 

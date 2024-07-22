@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router();
 
-const userController = require('../controllers/user')
-const blogController = require('../controllers/employee')
+const employeeController = require('../controllers/employee')
 const { checkUserSession } = require('../middlewares')
 
 /**
@@ -69,8 +68,12 @@ const { checkUserSession } = require('../middlewares')
  *                  content:
  *                      text/html:
 */
-router.post('/login', [checkUserSession], userController.postLoginUser)
 
-router.post('/register', [checkUserSession], userController.saveUser)
+
+router.post('/store', [checkUserSession],  employeeController.storeEmployee)
+
+router.get('/new', [checkUserSession], employeeController.newEmployee)
+
+router.get('/:id', employeeController.getEmployeeById)
 
 module.exports = router;
