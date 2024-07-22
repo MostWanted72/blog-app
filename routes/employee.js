@@ -6,65 +6,47 @@ const { checkUserSession } = require('../middlewares')
 
 /**
  * @swagger
- *  /user/login:
- *      post:
- *          summary: logs in user
- *          requestBody:
- *              required: true
- *              content:
- *                  application/x-www-form-urlencoded:
- *                      schema:
- *                          username:
- *                              type: string
- *                          password:
- *                              type: string
- *          responses:
- *              '301':
- *                  description: logged in
+ * components:
+ *  schemas:
+*      Employee:
+*          type: Object
+*          required:
+*              - name
+*              - designation
+*          properties:
+*              name:
+*                  type: string
+*                  description: The name of the employee
+*              designation:
+*                  type: string
+*                  description: The position of the employee
+*          example:
+*              name: Rohan
+*              designation: SWE
  */
 
 /**
  * @swagger
- *  /users/register:
- *      post:
- *          summary: Registers new user
- *          requestBody:
- *              required: true
- *              content:
- *                  application/x-www-form-urlencoded:
- *                      schema:
- *                          username:
- *                              type: string
- *                          password:
- *                              type: string
- *          responses:
- *              '302':
- *                  description: registers new user
-*/
-
-
-/**
- * @swagger
- *  /posts/new:
+ *  /employee/new:
  *      get:
- *          summary: shows form for creating new blog
+ *          summary: shows form for adding new employee
  *          responses:
  *              '200':
- *                  description: shows form for creating new blog
+ *                  description: shows form for adding new employee
  *                  content:
  *                      text/html:
 */
 
 /**
  * @swagger
- *  /posts/{id}:
+ *  /employee/{id}:
  *      get:
- *          summary: shows a single blog
+ *          summary: shows detail of single employee
  *          parameters:
  *              - blog: id
  *          responses:
  *              '200':
- *                  description: shows a single blog
+ *                  description: shows detail of single employee
  *                  content:
  *                      text/html:
 */

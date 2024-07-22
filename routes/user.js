@@ -43,32 +43,6 @@ const { checkUserSession } = require('../middlewares')
  *                  description: registers new user
 */
 
-
-/**
- * @swagger
- *  /posts/new:
- *      get:
- *          summary: shows form for creating new blog
- *          responses:
- *              '200':
- *                  description: shows form for creating new blog
- *                  content:
- *                      text/html:
-*/
-
-/**
- * @swagger
- *  /posts/{id}:
- *      get:
- *          summary: shows a single blog
- *          parameters:
- *              - blog: id
- *          responses:
- *              '200':
- *                  description: shows a single blog
- *                  content:
- *                      text/html:
-*/
 router.post('/login', [checkUserSession], userController.postLoginUser)
 
 router.post('/register', [checkUserSession], userController.saveUser)
