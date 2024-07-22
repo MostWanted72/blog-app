@@ -1,2 +1,2 @@
-# blog-app
-A blog aaap to learn Node.js 
+# boho2.0
+A dummy wpp to manage employees 
